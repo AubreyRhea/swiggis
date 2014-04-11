@@ -1,0 +1,26 @@
+<head>
+<title>Photo Album</title>
+<script src="javascript.js"></script>
+</head>
+
+<body>
+<label for="PhotoSelectBox" style="position:absolute; left:20px; top:20px; width:100px;">Select a photo:</label>
+<select id="PhotoSelectBox" style="position:absolute; left:20px; top:40px; width:300px;" onchange="MoveSelectedPhoto(this.value)"></select>
+
+<span id="PhotoTitle" style="position:absolute; left:400px; top:20px;"></span>
+<img id="Photo" style="position:absolute; left:400px; top:40px;" height ="510" width ="737"></img>
+
+<button id="FirstButton" alt="First Image" style="position:absolute; left:500px; top:800px; width:45px; height:20px" 
+onclick="MoveFirst()"><<</button>
+
+<button id="PreviousButton" alt="Previous Image" style="position:absolute; left:550px; top:800px; width:45px; height:20px" 
+onclick="MovePrevious()"><</button>
+
+<button id="NextButton" alt="Next Image" style="position:absolute; left:600px; top:800px; width:45px; height:20px" 
+onclick="MoveNext()">></button>
+
+<button id="LastButton" alt="Last Image" style="position:absolute; left:650px; top:800px; width:45px; height:20px" 
+onclick="MoveLast()">>></button>
+
+<script>PageLoad();</script>
+</body>
