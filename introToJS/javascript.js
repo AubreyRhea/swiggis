@@ -13,8 +13,8 @@ require(["esri/map", "dojo/on", "dojo/dom", "dojo/domReady!"],function(Map, on, 
                        "#10 Pleasant Valley @ S Lakeshore", "#6 Congress @ 6th St", "#16 E 7th Street Bridge over Texas-New Orleans RR",
                        "#23 Robert Mueller Airport", "#22 38th St @ Red River", "#27 LBJ Library"];
 
-    var imageLocations = [ [97.727314, 30.283061], [97.779239, 30.270478], [97.737999, 30.280725], [97.717332, 30.243198],
-        [97.742814, 30.268052], [97.707052, 30.258991], [97.699774, 30.292478], [97.723506, 30.295442], [97.727969, 30.283250] ];
+    var imageLocations = [ [-97.727314, 30.283061], [-97.779239, 30.270478], [-97.737999, 30.280725], [-97.717332, 30.243198],
+        [-97.742814, 30.268052], [-97.707052, 30.258991], [-97.699774, 30.292478], [-97.723506, 30.295442], [-97.727969, 30.283250] ];
 
 
     on(map,"load",PageLoad());
