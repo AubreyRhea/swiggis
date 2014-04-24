@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Photo Album</title>
-    <link type="text/css" href="style.css" rel="stylesheet"/>
-    
-    <script src="http://js.arcgis.com/3.9/"></script>
+    <title>test</title>
     <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css"/>
-    <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/dojo/dijit/themes/claro/claro.css"/>
+    <script src="http://js.arcgis.com/3.9/"></script>
+    <script src="javascript.js"></script>
 </head>
-
 <body>
     <label for="PhotoSelectBox" style="position:absolute; left:20px; top:20px; width:100px;">Select a photo:</label>
     <select id="PhotoSelectBox" style="position:absolute; left:20px; top:40px; width:300px;" onchange="MoveSelectedPhoto(this.value)"></select>
@@ -27,7 +24,8 @@
 
     <button id="LastButton" alt="Last Image" style="position:absolute; left:650px; top:800px; width:45px; height:20px" 
     onclick="MoveLast()">>></button>
-    <div id="map" style="position:absolute; left: 400px; top: 800px; height: 500px; width: 700px"></div>
-        
-    <script src="javascript.js"></script>
+
+    <div id="mapDiv" style="height:500px;width:500px;position:absolute;bottom:0px;right:0px;"></div>
+    <script type="text/javascript">PageLoad()</script>
 </body>
+</html>
