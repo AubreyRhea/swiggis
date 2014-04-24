@@ -84,10 +84,24 @@ function EnableNavigationButtons() {
     }
 }
 
-require(["esri/map", "dojo/domReady!"], function (Map) {
+require([
+    "esri/map", "esri/symbols/SimpleMarkerSymbol", "esri/graphic", "esri/geometry/Point", "dojo/domReady!"
+], function (
+    Map, SimpleMarkerSymbol, Graphic, Point
+    ) {
     var map = new Map("mapDiv", {
         center: [-98.5795, 39.8282],
         zoom: 3,
         basemap: "streets"
     });
+
+    var symbol = new SimpleMarkerSymbol();
+
+    for (var i in imageLocations) {
+        var point = new Point(imageLocations[i]);
+        console.log(point);
+        var graphic = new Graphic(point, symbol);
+        console.log(graphic);
+        map.graphics.add(graphic)
+    }
 });
