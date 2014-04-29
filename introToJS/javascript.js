@@ -136,15 +136,17 @@ function EnableNavigationButtons() {
 require([
     "dojo/on", "dojo/dom",
     "esri/map", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/graphic", "esri/geometry/Point", "esri/graphicsUtils", "esri/Color",
+    "esri/InfoTemplate",
     "dojo/domReady!"
 ], function (
     on, dom,
-    Map, SimpleMarkerSymbol, SimpleLineSymbol, Graphic, Point, GraphicsUtils, Color
+    Map, SimpleMarkerSymbol, SimpleLineSymbol, Graphic, Point, GraphicsUtils, Color,
+    InfoTemplate
     ) {
     var map = new Map("mapDiv", {
         center: [-97.742581, 30.2837352],
         zoom: 12,
-        basemap: "streets"
+        basemap: "topo"
     });
 
     var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 15,
@@ -153,13 +155,17 @@ require([
         new Color("teal"));
     //symbol.setColor = new Color([100, 100, 100]);
 
-    var load = dom.byId("load");
     on(map, "load", loadGraphics);
     function loadGraphics() {
-        for (var i in imageLocations) {
-            var point = new Point(imageLocations[i]);
-            var graphic = new Graphic(point, symbol);
+        for (var i in images) {
+            var geometry = new Point(images[i].location);
+            var attr = { "index": i,"Image": images[i].title };
+            var infoTemplate = new InfoTemplate("Photos", "${Image}");
+            var graphic = new Graphic(geometry, symbol, attr, infoTemplate);
             map.graphics.add(graphic)
         }
+        on(map.graphics, "click", function (evt) {
+            MoveSelectedPhoto(evt.graphic.attributes.index)
+        });
     }
 });
