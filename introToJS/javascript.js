@@ -63,18 +63,18 @@ var images = {
 //PageLoad();
 function PageLoad() {
     var box = document.getElementById("PhotoSelectBox");
-    for (var i = 0; i < imageTitles.length; ++i) {
-        box[box.length] = new Option(imageTitles[i], i);
+    for (var i in images) {
+        box[box.length] = new Option(images[i].title, i);
     }
     MoveSelectedPhoto(0);
 }
 
 function MoveSelectedPhoto(newPhotoIndex) {
     var title = document.getElementById("PhotoTitle");
-    title.innerText = imageTitles[newPhotoIndex];
+    title.innerText = images[newPhotoIndex].title;
 
     var photo = document.getElementById("Photo");
-    photo.src = imagePaths[newPhotoIndex];
+    photo.src = images[newPhotoIndex].path;
 
     if (newPhotoIndex == 8) {
         photo.width = "510";
@@ -107,7 +107,7 @@ function MoveNext() {
 }
 
 function MoveLast() {
-    MoveSelectedPhoto(imageTitles.length - 1);
+    MoveSelectedPhoto(Object.keys(images).length - 1);
 }
 
 function EnableNavigationButtons() {
@@ -135,12 +135,16 @@ function EnableNavigationButtons() {
 
 require([
     "dojo/on", "dojo/dom",
-    "esri/map", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/graphic", "esri/geometry/Point", "esri/graphicsUtils", "esri/Color",
+    "esri/map",
+    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/PictureMarkerSymbol",
+    "esri/graphic", "esri/geometry/Point", "esri/graphicsUtils", "esri/Color",
     "esri/InfoTemplate",
     "dojo/domReady!"
 ], function (
     on, dom,
-    Map, SimpleMarkerSymbol, SimpleLineSymbol, Graphic, Point, GraphicsUtils, Color,
+    Map,
+    SimpleMarkerSymbol, SimpleLineSymbol, PictureMarkerSymbol,
+    Graphic, Point, GraphicsUtils, Color,
     InfoTemplate
     ) {
     var map = new Map("mapDiv", {
@@ -149,11 +153,11 @@ require([
         basemap: "topo"
     });
 
-    var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 15,
-        new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-        new Color("blue"), 1),
-        new Color("teal"));
-    //symbol.setColor = new Color([100, 100, 100]);
+    //var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 15,
+    //    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+    //    new Color("blue"), 1),
+    //    new Color("teal"));
+    var symbol = new PictureMarkerSymbol("Images/camera-icon.png", 20, 20);
 
     on(map, "load", loadGraphics);
     function loadGraphics() {
