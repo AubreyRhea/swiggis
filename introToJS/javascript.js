@@ -57,10 +57,6 @@ var images = {
     }
 }
 
-
-
-//on(map, "load", PageLoad());
-//PageLoad();
 function PageLoad() {
     var box = document.getElementById("PhotoSelectBox");
     for (var i in images) {
@@ -107,6 +103,7 @@ function MoveNext() {
 }
 
 function MoveLast() {
+    //Object.keys().length might not be intuitive for beginners, but I don't know how else to do it
     MoveSelectedPhoto(Object.keys(images).length - 1);
 }
 
@@ -133,18 +130,20 @@ function EnableNavigationButtons() {
     }
 }
 
+//Not good practice to have a require underneath existing code,
+//but I don't want to confuse students by moving code around
 require([
-    "dojo/on", "dojo/dom",
+    "dojo/on",
     "esri/map",
-    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/PictureMarkerSymbol",
-    "esri/graphic", "esri/geometry/Point", "esri/graphicsUtils", "esri/Color",
+    "esri/symbols/PictureMarkerSymbol",
+    "esri/graphic", "esri/geometry/Point", "esri/Color",
     "esri/InfoTemplate",
     "dojo/domReady!"
 ], function (
-    on, dom,
+    on,
     Map,
-    SimpleMarkerSymbol, SimpleLineSymbol, PictureMarkerSymbol,
-    Graphic, Point, GraphicsUtils, Color,
+    PictureMarkerSymbol,
+    Graphic, Point, Color,
     InfoTemplate
     ) {
     var map = new Map("mapDiv", {
@@ -152,14 +151,10 @@ require([
         zoom: 12,
         basemap: "topo"
     });
+    on(map, "load", loadGraphics);
 
-    //var symbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 15,
-    //    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-    //    new Color("blue"), 1),
-    //    new Color("teal"));
     var symbol = new PictureMarkerSymbol("Images/camera-icon.png", 20, 20);
 
-    on(map, "load", loadGraphics);
     function loadGraphics() {
         for (var i in images) {
             var geometry = new Point(images[i].location);
