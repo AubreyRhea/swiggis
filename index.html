@@ -5,31 +5,31 @@
     <link rel="stylesheet" href="http://js.arcgis.com/3.9/js/esri/css/esri.css"/>
     <script src="http://js.arcgis.com/3.9/"></script>
 </head>
-<body>
-    <label for="PhotoSelectBox" style="position:absolute; left:20px; top:20px; width:100px;">Select a photo:</label>
-    <select id="PhotoSelectBox" style="position:absolute; left:20px; top:40px; width:350px;" onchange="MoveSelectedPhoto(this.value)"></select>
-	
-    <button id="SlideshowButton" alt="Play Slideshow" style="position:absolute; left:500px; top:40px; width:150px; height:20px" 
-    onclick="PlaySlideshow()">Play Slideshow</button>
+    <body>
+        <label for="PhotoSelectBox" style="position:absolute; left:20px; top:20px; width:100px;">Select a photo:</label>
+        <select id="PhotoSelectBox" style="position:absolute; left:20px; top:40px; width:350px;" onchange="MoveSelectedPhoto(this.value)"></select>
 
-    <img id="Photo" style="position:absolute; left:20px; top:80px;" height ="510" width ="737"></img>
+        <button id="SlideshowButton" alt="Play Slideshow" style="position:absolute; left:500px; top:40px; width:150px; height:20px" 
+        onclick="PlaySlideshow()">Play Slideshow</button>
 
-    <button id="FirstButton" alt="First Image" style="position:absolute; left:20px; top:830px; width:45px; height:20px" 
-    onclick="MoveFirst()"><<</button>
+        <img id="Photo" style="position:absolute; left:20px; top:80px;" height ="510" width ="737"/>
 
-    <button id="PreviousButton" alt="Previous Image" style="position:absolute; left:70px; top:830px; width:45px; height:20px" 
-    onclick="MovePrevious()"><</button>
+        <button id="FirstButton" alt="First Image" style="position:absolute; left:20px; top:830px; width:45px; height:20px" 
+        onclick="MoveFirst()"><<</button>
 
-    <button id="NextButton" alt="Next Image" style="position:absolute; left:120px; top:830px; width:45px; height:20px" 
-    onclick="MoveNext()">></button>
+        <button id="PreviousButton" alt="Previous Image" style="position:absolute; left:70px; top:830px; width:45px; height:20px" 
+        onclick="MovePrevious()"><</button>
 
-    <button id="LastButton" alt="Last Image" style="position:absolute; left:170px; top:830px; width:45px; height:20px" 
-    onclick="MoveLast()">>></button>
+        <button id="NextButton" alt="Next Image" style="position:absolute; left:120px; top:830px; width:45px; height:20px" 
+        onclick="MoveNext()">></button>
 
-    <div id="mapDiv" style="height:500px;width:500px;position:absolute;top:80px;left:770px;"></div>
+        <button id="LastButton" alt="Last Image" style="position:absolute; left:170px; top:830px; width:45px; height:20px" 
+        onclick="MoveLast()">>></button>
 
-    
-    <script src="javascript.js"></script>
-    <script type="text/javascript">PageLoad()</script>
-</body>
+        <div id="mapDiv" style="height:510px;width:500px;position:absolute;top:80px;left:770px;"></div>
+
+
+        <script src="javascript.js"></script>
+        <script type="text/javascript">PageLoad()</script>
+    </body>
 </html>
