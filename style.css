@@ -1,4 +1,75 @@
 body{
   margin:0px;
   padding:0px;
+  font-size: 15px;
+  font-weight:bold;
+  color: #0066CC;
+  font-family:Calibri;
+}
+
+.dropDown
+{
+  color: #102132;      
+  border:1px solid gray;
+  border-radius:5px;
+  box-shadow: 0 0 2px 2px rgba(128,128,128,0.2);
+  padding:2px;
+  overflow-y:auto\9;
+  font-family:Calibri;
+ }
+ 
+.dropDown:hover
+{
+  color: #102132;      
+  border:1px solid gray;
+  border-radius:5px;
+  box-shadow: 0 0 4px 4px rgba(226,195,128,0.4);
+  overflow-y:auto\9;
+}
+
+.dropDown:focus
+{
+  color: #102132;     
+  border:1px solid rgb(199,161,89);
+  border-radius:5px;
+  box-shadow: 0 0 4px 4px rgba(226,195,128,0.4);
+  overflow-y:auto\9;
+}
+
+.button
+{  
+  color: #102132;      
+  border:1px solid gray;
+  border-radius:5px;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e0e0e0');
+  background : -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e0e0e0)); /* for webkit browsers */
+  background : -moz-linear-gradient(top,  #ffffff,  #e0e0e0); /* for firefox 3.6+ */     
+  box-shadow: 0 0 1px 1px rgba(128,128,128,0.2);
+  padding:5px;
+  height:27px
+ }
+
+.button:hover
+{ 
+  color: #102132;      
+  border:1px solid gray;
+  border-radius:5px;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e0e0e0');
+  background : -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e0e0e0)); /* for webkit browsers */
+  background : -moz-linear-gradient(top,  #ffffff,  #e0e0e0); /* for firefox 3.6+ */ 
+  box-shadow: 0 0 4px 4px rgba(226,195,128,0.4);
+  padding:5px;
+}
+
+
+.button:focus
+{
+  color: #102132;      
+  border:1px solid gray;
+  border-radius:5px;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e0e0e0');
+  background : -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#e0e0e0)); /* for webkit browsers */
+  background : -moz-linear-gradient(top,  #ffffff,  #e0e0e0); /* for firefox 3.6+ */ 
+  box-shadow: 0 0 2px 2px rgba(0,0,255,0.3);
+  padding:5px;
 }
