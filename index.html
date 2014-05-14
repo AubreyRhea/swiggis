@@ -8,24 +8,19 @@
 </head>
     <body>
         <label for="PhotoSelectBox" style="position:absolute; left:20px; top:20px; width:100px;">Select a photo:</label>
-        <select id="PhotoSelectBox" style="position:absolute; left:20px; top:40px; width:350px;" class="dropDown" onchange="MoveSelectedPhoto(this.value)"></select>
+        <select id="PhotoSelectBox" style="position:absolute; left:20px; top:40px; width:350px;" class="dropDown"></select>
 
-        <button id="SlideshowButton" alt="Play Slideshow" style="position:absolute; left:500px; top:40px; width:150px;" class="button"  
-        onclick="PlaySlideshow()">Play Slideshow</button>
+        <button id="SlideshowButton" alt="Play Slideshow" style="position:absolute; left:500px; top:40px; width:150px;" class="button">Play Slideshow</button>
 
         <img id="Photo" style="position:absolute; left:20px; top:80px;" height="510" width ="737"/>
 
-        <button id="FirstButton" alt="First Image" style="position:absolute; left:20px; top:830px; width:45px;" class="button"  
-        onclick="MoveFirst()"><<</button>
+        <button id="FirstButton" alt="First Image" style="position:absolute; left:20px; top:830px; width:45px;" class="button"> << </button>
 
-        <button id="PreviousButton" alt="Previous Image" style="position:absolute; left:70px; top:830px; width:45px;" class="button"  
-        onclick="MovePrevious()"><</button>
+        <button id="PreviousButton" alt="Previous Image" style="position:absolute; left:70px; top:830px; width:45px;" class="button"> < </button>
 
-        <button id="NextButton" alt="Next Image" style="position:absolute; left:120px; top:830px; width:45px;" class="button"  
-        onclick="MoveNext()">></button>
+        <button id="NextButton" alt="Next Image" style="position:absolute; left:120px; top:830px; width:45px;" class="button"> > </button>
 
-        <button id="LastButton" alt="Last Image" style="position:absolute; left:170px; top:830px; width:45px;" class="button" 
-        onclick="MoveLast()">>></button>
+        <button id="LastButton" alt="Last Image" style="position:absolute; left:170px; top:830px; width:45px;" class="button"> >> </button>
 
         <div id="mapDiv" style="height:510px;width:500px;position:absolute;top:80px;left:770px;"></div>
 

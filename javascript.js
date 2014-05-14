@@ -1,7 +1,3 @@
-
-
-//Not good practice to have a require underneath existing code,
-//but I don't want to confuse students by moving code around
 require([
     "dojo/on", "dojo/dom",
     "esri/map",
@@ -160,9 +156,17 @@ require([
 
         setTimeout("PlaySlideshow()", 2000)	
     }
-    
-    //dom.ById("NextButton").on("click", MoveNext);
-    on(dom.ById("NextButton"),"click", MoveNext);
+
+    //Lotsa event handlers
+    document.getElementById("NextButton").onclick = function () { MoveNext(); }
+    document.getElementById("PreviousButton").onclick = function () { MovePrevious(); }
+    document.getElementById("FirstButton").onclick = function () { MoveFirst(); }
+    document.getElementById("LastButton").onclick = function () { MoveLast(); }
+    document.getElementById("SlideshowButton").onclick = function () { PlaySlideshow(); }
+    document.getElementById("PhotoSelectBox").onclick = function () { MoveSelectedPhoto(this.value); }
+
+
+
     var map = new Map("mapDiv", {
         center: [-97.742581, 30.2837352],
         zoom: 12,
