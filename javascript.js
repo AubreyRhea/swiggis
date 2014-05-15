@@ -72,7 +72,6 @@ require([
         }
     }
     
-    PageLoad();
 
     function PageLoad() {
         var box = document.getElementById("PhotoSelectBox");
@@ -98,6 +97,7 @@ require([
         box.selectedIndex = newPhotoIndex;
 
         EnableNavigationButtons();
+        zoomToGraphic(new Point(images[newPhotoIndex].location));
     }
 
     function MoveFirst() {
@@ -154,7 +154,7 @@ require([
         return;
         }
 
-        setTimeout("PlaySlideshow()", 2000)	
+        setTimeout(function () { PlaySlideshow(); }, 2000)
     }
 
     //Lotsa event handlers
@@ -163,7 +163,7 @@ require([
     document.getElementById("FirstButton").onclick = function () { MoveFirst(); }
     document.getElementById("LastButton").onclick = function () { MoveLast(); }
     document.getElementById("SlideshowButton").onclick = function () { PlaySlideshow(); }
-    document.getElementById("PhotoSelectBox").onclick = function () { MoveSelectedPhoto(this.value); }
+    document.getElementById("PhotoSelectBox").onchange = function () { MoveSelectedPhoto(this.value); }
 
 
 
@@ -172,7 +172,7 @@ require([
         zoom: 12,
         basemap: "topo"
     });
-    on(map, "load", loadGraphics);
+    on(map, "load", function () { loadGraphics(); PageLoad(); });
 
     var symbol = new PictureMarkerSymbol("Images/camera-icon.png", 20, 20);
 
@@ -187,5 +187,9 @@ require([
         on(map.graphics, "click", function (evt) {
             MoveSelectedPhoto(evt.graphic.attributes.index)
         });
+    }
+
+    function zoomToGraphic(point) {
+        map.centerAndZoom(point, 16);
     }
 });
