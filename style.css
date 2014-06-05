@@ -73,3 +73,67 @@ body{
   box-shadow: 0 0 2px 2px rgba(0,0,255,0.3);
   padding:5px;
 }
+
+#PhotoSelectBoxLabel {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 100px;
+}
+
+#PhotoSelectBox {
+    position: absolute;
+    left: 20px;
+    top: 40px;
+    width: 350px;
+}
+
+#SlideshowButton {
+    position: absolute;
+    left: 500px;
+    top: 40px;
+    width: 150px;
+}
+
+#Photo {
+    position: absolute;
+    left: 20px;
+    top: 80px;
+}
+
+#FirstButton {
+    position: absolute;
+    left: 20px;
+    top: 830px;
+    width: 45px;
+}
+
+#PreviousButton {
+    position: absolute;
+    left: 70px;
+    top: 830px;
+    width: 45px;
+}
+
+#NextButton {
+    position: absolute;
+    left: 120px;
+    top: 830px;
+    width: 45px;
+}
+
+#LastButton {
+    position: absolute;
+    left: 170px;
+    top: 830px;
+    width: 45px;
+}
+
+#mapDiv {
+    position: absolute;
+    left: 770px;
+    top: 80px;
+    width: 500px;
+	height:510px
+}
+
