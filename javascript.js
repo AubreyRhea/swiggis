@@ -97,6 +97,8 @@ require([
         box.selectedIndex = newPhotoIndex;
 
         EnableNavigationButtons();
+
+        //added during ESRI portion
         zoomToGraphic(new Point(images[newPhotoIndex].location));
     }
 
@@ -166,6 +168,7 @@ require([
     document.getElementById("PhotoSelectBox").onchange = function () { MoveSelectedPhoto(this.value); }
 
 
+    //Everything below this line is added during ESRI portion
 
     var map = new Map("mapDiv", {
         center: [-97.742581, 30.2837352],
