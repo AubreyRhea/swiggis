@@ -1,12 +1,12 @@
 require([
-    "dojo/on", "dojo/dom",
+    "dojo/on",
     "esri/map",
     "esri/symbols/PictureMarkerSymbol",
     "esri/graphic", "esri/geometry/Point", "esri/Color",
     "esri/InfoTemplate",
     "dojo/domReady!"
 ], function (
-    on, dom,
+    on,
     Map,
     PictureMarkerSymbol,
     Graphic, Point, Color,
