@@ -2,14 +2,14 @@ require([
     "dojo/on",
     "esri/map",
     "esri/symbols/PictureMarkerSymbol",
-    "esri/graphic", "esri/geometry/Point", "esri/Color",
+    "esri/graphic", "esri/geometry/Point",
     "esri/InfoTemplate",
     "dojo/domReady!"
 ], function (
     on,
     Map,
     PictureMarkerSymbol,
-    Graphic, Point, Color,
+    Graphic, Point,
     InfoTemplate
     ) {
         
