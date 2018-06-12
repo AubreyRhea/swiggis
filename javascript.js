@@ -2,28 +2,19 @@ require([
     "dojo/on",
     "esri/map",
     "esri/symbols/PictureMarkerSymbol",
-    "esri/graphic", "esri/geometry/Point",
+    "esri/graphic", 
+	"esri/geometry/Point",
     "esri/InfoTemplate",
     "dojo/domReady!"
 ], function (
     on,
     Map,
     PictureMarkerSymbol,
-    Graphic, Point,
+    Graphic, 
+	Point,
     InfoTemplate
     ) {
         
-    var imagePaths = ["Images/Capitol 009.JPG", "Images/Capitol 070.JPG", "Images/Capitol 104.JPG",
-                      "Images/Lakeshore 009.JPG", "Images/Lemon 006.JPG", "Images/MLK 021.JPG", "Images/Mueller 008.JPG", "Images/Noodle 016.JPG",
-                      "Images/Noodle 025.JPG"];
-
-    var imageTitles = ["#13 SB I-35 Upper Deck", "#18 Zilker Clubhouse", "#28 N Congress @ MLK Blvd",
-                       "#10 Pleasant Valley @ S Lakeshore", "#6 Congress @ 6th St", "#16 E 7th Street Bridge over Texas-New Orleans RR",
-                       "#23 Robert Mueller Airport", "#22 38th St @ Red River", "#27 LBJ Library"];
-
-    var imageLocations = [[-97.727314, 30.283061], [-97.779239, 30.270478], [-97.737999, 30.280725], [-97.717332, 30.243198],
-        [-97.742814, 30.268052], [-97.707052, 30.258991], [-97.699774, 30.292478], [-97.723506, 30.295442], [-97.727969, 30.283250]];
-
     var images = {
         0: {
             title: "#13 SB I-35 Upper Deck",
@@ -82,10 +73,15 @@ require([
     }
 
     function MoveSelectedPhoto(newPhotoIndex) {
-        var photo = document.getElementById("Photo");
-        photo.src = images[newPhotoIndex].path;
+        UpdateSelectedPhoto(newPhotoIndex);
+		zoomToGraphic(new Point(images[newPhotoIndex].location));
+    }
+	
+	function UpdateSelectedPhoto(PhotoIndex) {
+		var photo = document.getElementById("Photo");
+        photo.src = images[PhotoIndex].path;
 
-        if (newPhotoIndex == 8) {
+        if (PhotoIndex == 8) {
             photo.width = "510";
             photo.height = "737";
         } else {
@@ -94,13 +90,10 @@ require([
         }
 
         var box = document.getElementById("PhotoSelectBox");
-        box.selectedIndex = newPhotoIndex;
+        box.selectedIndex = PhotoIndex;
 
         EnableNavigationButtons();
-
-        //added during ESRI portion
-        zoomToGraphic(new Point(images[newPhotoIndex].location));
-    }
+	}
 
     function MoveFirst() {
         MoveSelectedPhoto(0);
@@ -140,7 +133,7 @@ require([
         if (photoIndex == 0) {
             firstButton.disabled = true;
             previousButton.disabled = true;
-        } else if (photoIndex == imageTitles.length - 1) {
+        } else if (photoIndex == Object.keys(images).length - 1) {
             nextButton.disabled = true;
             lastButton.disabled = true;
         }
@@ -166,15 +159,15 @@ require([
     document.getElementById("LastButton").onclick = function () { MoveLast(); }
     document.getElementById("SlideshowButton").onclick = function () { PlaySlideshow(); }
     document.getElementById("PhotoSelectBox").onchange = function () { MoveSelectedPhoto(this.value); }
+	
+	var options = {
+		center: [-97.742581, 30.2837352],
+		zoom: 12,
+		basemap: "topo"
+		};	
 
-
-    //Everything below this line is added during ESRI portion
-
-    var map = new Map("mapDiv", {
-        center: [-97.742581, 30.2837352],
-        zoom: 12,
-        basemap: "topo"
-    });
+    var map = new Map("mapDiv", options);
+	
     on(map, "load", function () { loadGraphics(); PageLoad(); });
 
     var symbol = new PictureMarkerSymbol("Images/camera-icon.png", 20, 20);
@@ -185,10 +178,11 @@ require([
             var attr = { "index": i,"Image": images[i].title };
             var infoTemplate = new InfoTemplate("Photos", "${Image}");
             var graphic = new Graphic(geometry, symbol, attr, infoTemplate);
-            map.graphics.add(graphic)
+            map.graphics.add(graphic);
         }
-        on(map.graphics, "click", function (evt) {
-            MoveSelectedPhoto(evt.graphic.attributes.index)
+		
+        on(map.graphics, "click", function (e) {
+            UpdateSelectedPhoto(e.graphic.attributes.index);
         });
     }
 
