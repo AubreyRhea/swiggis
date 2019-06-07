@@ -1,18 +1,20 @@
 require([
     "dojo/on",
-    "esri/map",
+    "esri/Map",
+	"esri/views/MapView",
     "esri/symbols/PictureMarkerSymbol",
-    "esri/graphic", 
+    "esri/Graphic", 
 	"esri/geometry/Point",
-    "esri/InfoTemplate",
+	"esri/PopupTemplate",
     "dojo/domReady!"
 ], function (
     on,
     Map,
+	MapView,
     PictureMarkerSymbol,
     Graphic, 
 	Point,
-    InfoTemplate
+	PopupTemplate
     ) {
         
     var images = {
@@ -77,11 +79,11 @@ require([
 		zoomToGraphic(new Point(images[newPhotoIndex].location));
     }
 	
-	function UpdateSelectedPhoto(PhotoIndex) {
+	function UpdateSelectedPhoto(newPhotoIndex) {
 		var photo = document.getElementById("Photo");
-        photo.src = images[PhotoIndex].path;
+        photo.src = images[newPhotoIndex].path;
 
-        if (PhotoIndex == 8) {
+        if (newPhotoIndex == 8) {
             photo.width = "510";
             photo.height = "737";
         } else {
@@ -90,7 +92,7 @@ require([
         }
 
         var box = document.getElementById("PhotoSelectBox");
-        box.selectedIndex = PhotoIndex;
+        box.selectedIndex = newPhotoIndex;
 
         EnableNavigationButtons();
 	}
@@ -160,33 +162,38 @@ require([
     document.getElementById("SlideshowButton").onclick = function () { PlaySlideshow(); }
     document.getElementById("PhotoSelectBox").onchange = function () { MoveSelectedPhoto(this.value); }
 	
-	var options = {
-		center: [-97.742581, 30.2837352],
-		zoom: 12,
-		basemap: "topo"
-		};	
-
-    var map = new Map("mapDiv", options);
+    var map = new Map({ basemap: "topo" });
 	
-    on(map, "load", function () { loadGraphics(); PageLoad(); });
+	var options = {
+		container: "mapDiv",
+		map: map,
+		center: [-97.742581, 30.2837352],
+		zoom: 12
+	};	
+		
+	var view = new MapView(options);
+	
+    view.when(function () { loadGraphics(); PageLoad(); });
 
     var symbol = new PictureMarkerSymbol("Images/camera-icon.png", 20, 20);
 
     function loadGraphics() {
-        for (var i in images) {
+        for (var i in images) { 
             var geometry = new Point(images[i].location);
-            var attr = { "index": i,"Image": images[i].title };
-            var infoTemplate = new InfoTemplate("Photos", "${Image}");
-            var graphic = new Graphic(geometry, symbol, attr, infoTemplate);
-            map.graphics.add(graphic);
+            var attr = {"index": i, "Image": images[i].title};
+			var popupTemplate = new PopupTemplate({title: "Photos", content: "{Image}"});
+            var graphic = new Graphic(geometry, symbol, attr, popupTemplate);
+            view.graphics.add(graphic);
         }
 		
-        on(map.graphics, "click", function (e) {
-            UpdateSelectedPhoto(e.graphic.attributes.index);
+		view.on("click", function (e) {
+			view.hitTest(e).then(function(response) {
+				UpdateSelectedPhoto(response.results[0].graphic.attributes.index);
+			});
         });
     }
 
     function zoomToGraphic(point) {
-        map.centerAndZoom(point, 16);
+        view.goTo({target: point, zoom: 16});
     }
 });
